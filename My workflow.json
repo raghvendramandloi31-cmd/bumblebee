@@ -1,0 +1,116 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "id": "08268392-1c57-45b3-9900-f4833ef41849",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "d507cda1-de56-47d1-a3a2-477dcceea23f"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1c572f8f-dd96-46eb-9fe2-c9780c40b23b",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "notes": "You are an expert in nan. Your role is to offer advice in building out and designing workflows, choosing nodes, explaining node functions, structuring input and output, writing single line expressions that work with n8n."
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-6-luna-pro",
+        "options": {
+          "maxTokens": 4096
+        }
+      },
+      "id": "cc35d992-39af-42fa-a870-61f383cccd72",
+      "name": "OpenRouter Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        96,
+        208
+      ],
+      "credentials": {
+        "openRouterApi": {
+          "id": "oabRDWKimcENBiiH",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "c3306735-c1f5-4ea8-9355-f47272c3c14f",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        240,
+        208
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d1adcff2-789c-4a7a-b89a-d645b7e5f4b2",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b4c60750a086959821b9a32f5f75b406ed6b3e59eb57d420f77fdf6186fb2b60"
+  },
+  "nodeGroups": [],
+  "id": "dMClZ5BnUyvg5bBf",
+  "tags": []
+}
